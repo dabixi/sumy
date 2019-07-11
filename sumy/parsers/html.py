@@ -102,7 +102,11 @@ class HtmlParser(DocumentParser):
             # solve unrecognized acronyms such as "F.A.A. said..."
             for i in range(len(new_sentences)):
                 if new_sentences[i][0].islower():
-                    _new_sentences.pop()
+                    try:
+                        _new_sentences.pop()
+                    except:
+                        pass
+                    _new_sentences.append(new_sentences[i-1] + ' ' + new_sentences[i])
                     _new_sentences.append(new_sentences[i-1] + ' ' + new_sentences[i])
                 else:
                     _new_sentences.append(new_sentences[i])
